@@ -1,1 +1,1 @@
-only need to keep `start idx` and `current size`
+only need to keep `start idx (front)` and `current size`
