@@ -1,17 +1,13 @@
 class Solution:
-   #DFS + memo
-   def findTargetSumWays(self, nums: List[int], S: int) -> int:
-       memo = {}
-       def dfs(i,summary):
-           if i == len(nums):
-               if summary == S:
-                   memo[(i,summary)] = 1
-               else:
-                   memo[(i,summary)] = 0
-           if (i,summary) not in memo:   
-               memo[(i,summary)] = dfs(i+1,summary+nums[i]) + dfs(i+1,summary-nums[i])
-           return memo[(i,summary)]
-       dfs(0,0)
-       return memo[(0,0)]     
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        cnt = {0:1}
+        for i in nums:            
+            tmpCnt = defaultdict(int)
+            for x in cnt:
+                tmpCnt[x+i] += cnt[x]
+                tmpCnt[x-i] += cnt[x]
+            cnt = tmpCnt
+                                
+        return cnt.get(target, 0)            
             
         
