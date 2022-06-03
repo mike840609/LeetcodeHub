@@ -1,25 +1,21 @@
 class Solution:
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
         m, n = len(mat), len(mat[0])
-        DIR = [0, 1, 0, -1, 0]
         
-        q = deque([])
-        for r in range(m):
-            for c in range(n):
-                if mat[r][c] == 0 :
-                    q.append((r,c))
-                else:
-                    mat[r][c] = -1 # not processed yet!
-                    
+        for i in range(m):
+            for j in range(n):
+                if mat[i][j] != 0 :
+                    top = mat[i-1][j] if i-1 >= 0 else float('inf')
+                    left = mat[i][j-1] if j-1 >= 0 else float('inf')
+                    mat[i][j] = min(top , left) + 1
         
-        while q :
-            r, c = q.popleft()
-            for i in range(4):
-                nr, nc = r + DIR[i], c + DIR[i+1]
+        
+        for i in range(m-1, -1, -1):
+            for j in range(n-1, -1, -1):
+                down = mat[i+1][j] if i+1 < m else float('inf')
+                right  = mat[i][j+1] if j+1 < n else float('inf')
+                mat[i][j] = min(mat[i][j], down + 1, right + 1)
                 
-                if 0 <= nr < m and 0<= nc < n and mat[nr][nc] == -1:
-                    mat[nr][nc] = mat[r][c] + 1
-                    q.append((nr, nc))
         return mat
-            
-        
+                
+                
