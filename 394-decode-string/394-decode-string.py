@@ -1,16 +1,19 @@
-class Solution(object):
-    def decodeString(self, s):
-        stk, num, cur = [], 0, ''
+class Solution:
+    def decodeString(self, s: str) -> str:
+        stk, num, curStr = [], 0, ''
+        
         for c in s:
             if c.isdigit():
                 num = num*10 + int(c)
-            elif c =='[':
-                stk.append([num, cur])
-                num = 0
-                cur = ''
+            elif c == '[':
+                stk.append((num, curStr))
+                num = 0 
+                curStr = ''
             elif c == ']':
-                pre_num, pre_s = stk.pop()
-                cur  = pre_s + pre_num *cur
+                preNum, preStr = stk.pop()
+                curStr = preStr + preNum * curStr
             else:
-                cur += c
-        return cur
+                curStr += c
+            # print(stk, curStr)
+                
+        return curStr
