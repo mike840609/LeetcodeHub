@@ -1,0 +1,1 @@
+https://leetcode.com/problems/map-sum-pairs/discuss/1371761/C%2B%2BJavaPython-Trie-and-HashMap-Efficient-and-Clean-and-Concise
