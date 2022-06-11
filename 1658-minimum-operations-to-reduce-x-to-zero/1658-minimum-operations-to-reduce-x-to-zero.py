@@ -1,22 +1,21 @@
 class Solution:
     def minOperations(self, nums: List[int], x: int) -> int:
-        rSum = [0] + list(accumulate(nums))
-        lSum = list(accumulate(nums[::-1]))[::-1] + [0]
+        
+        acc = [0] + list(accumulate(nums))        
+        dp = {val:i for i, val in enumerate(acc)}        
+        goal = acc[-1] - x 
         
         
-        res = sys.maxsize
+        if goal < 0 :
+            return -1 
         
-        d = {}
-        for i, val in enumerate(rSum):
-            d[val] = i
+        res = -sys.maxsize
         
+        for num, idx in dp.items():
+            if num + goal in dp:
+                idx2 = dp[num+goal]
+                res = max(res, idx2 - idx)
         
-        for i in range(len(lSum)-1, -1, -1):
-            val = lSum[i]
+        return len(nums) - res if res != -sys.maxsize else -1
             
-            if x-val in d:
-                idx = d[x-val]
-                if idx <= i:
-                    res = min(res, len(nums) - (i - idx))
-
-        return res if res != sys.maxsize else -1
+        
