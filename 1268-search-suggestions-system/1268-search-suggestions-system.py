@@ -1,24 +1,10 @@
 class Solution:
-    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
-        trie = {} 
-        for product in products:
-            p = trie            
-            for c in product:
-                p.setdefault(c, {})
-                p.setdefault('result', [])
-                p['result'].append(product)
-                p = p[c]
-            
-            p.setdefault('result', [])
-            p['result'].append(product)
-            
-        
-        res = [] 
-        p = trie
-        # print(p)
-        for c in searchWord:
-            res.append(sorted(p.get(c, {}).get('result', []))[:3])
-            p = p.get(c, {})
-            
-        return res
+    def suggestedProducts(self, A: List[str], word: str) -> List[List[str]]:
+        A.sort()
+        res, prefix = [], ''
+        for c in word:
+            prefix += c 
+            i = bisect.bisect_left(A, prefix)
+            res.append([w for w in A[i:i+3] if w.startswith(prefix)])
+        return res 
                 
