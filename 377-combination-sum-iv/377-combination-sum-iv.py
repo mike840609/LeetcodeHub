@@ -1,19 +1,14 @@
 class Solution:
     def combinationSum4(self, nums: List[int], target: int) -> int:
         
-        cnt = {0:1}        
-        res = 0 
+        dp = [0] * (target+1)
+        dp[0] = 1
         
-        while cnt:            
-            tmp = defaultdict(int)
-            for k, v in cnt.items():
-                for n in nums:
-                    if k+n <= target:
-                        tmp[k+n] += v                        
+        for i in range(len(dp)):
+            for n in nums:
+                if i-n >= 0 :
+                    dp[i] += dp[i-n]
+        return dp[-1]
 
-            cnt = tmp            
-            res += cnt.get(target, 0)
-            
-        return res 
                 
         
