@@ -11,6 +11,9 @@ Dynamic Programming
   - Merging Intervals
   - DP on Strings
   - Decision Making 
+- tips:
+  - using dp array.
+  - using dictionary for dp if some key not need to be calculated. `{0: 1}` 
 
 
 Blind 75
