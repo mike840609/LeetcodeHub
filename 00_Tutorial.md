@@ -11,9 +11,11 @@ Dynamic Programming
   - Merging Intervals
   - DP on Strings
   - Decision Making 
+  
 - tips:
   - using dp array.
   - using dictionary for dp if some key not need to be calculated. `{0: 1}` 
+  - find Equal Subset Sum ==> find two equal subset sum == find target(sum(A)//2), e.g. `416. Partition Equal Subset Sum`
 
 
 Blind 75
