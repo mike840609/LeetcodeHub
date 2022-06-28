@@ -7,10 +7,14 @@ class Solution:
         dp[2] = 2        
         mod = 10**9 + 7
         
+        tmp = 0
         for i in range(3, n+1):
             dp[i] += dp[i-1]
             dp[i] += dp[i-2]
-            dp[i] += 2 * sum(dp[0:i-2])
+            # dp[i] += 2 * sum(dp[0:i-2])
+            tmp += dp[i-3]
+            dp[i] += 2 * tmp
+            
             dp[i] %= mod
             
         return dp[n] % mod
