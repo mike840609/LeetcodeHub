@@ -4,12 +4,17 @@ class Solution:
         V.sort()
         
         H = [0] + H + [h]
-        V = [0] + V + [w]
+        V = [0] + V + [w]    
+            
+        hMax = self.getMaxDiff(H)
+        vMax = self.getMaxDiff(V)
         
-        
-        hMax = max([H[i] - H[i-1] for i in range(1, len(H))])
-        vMax = max([V[i] - V[i-1] for i in range(1, len(V))])
-        
-        # print(hMax, vMax)
-        
+        # print(hMax, vMax)        
         return hMax * vMax % (10**9+7)
+    
+    def getMaxDiff(self, A):
+        res = 0
+        for i in range(1, len(A)):
+            if A[i] - A[i-1] > res:
+                res = A[i] - A[i-1]
+        return res
