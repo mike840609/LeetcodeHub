@@ -1,32 +1,16 @@
 class Solution:
-    def wiggleMaxLength(self, nums: List[int]) -> int:
+    def wiggleMaxLength(self, A: List[int]) -> int:
+        length = 1
+        up = None # current is increasing or not
         
-        up = [0] * len(nums)
-        down = [0] * len(nums)
-        
-        up[0] = 1
-        down[0] = 1
-        
-        
-        for i in range(1, len(nums)):
+        for i in range(1, len(A)):
             
-            if nums[i] > nums[i-1]:
-                up[i] = down[i-1] + 1
-                down[i] = down[i-1]
+            if A[i] > A[i - 1] and up != True:
+                length += 1
+                up = True
                 
-            elif nums[i] < nums[i-1]:
-                down[i] = up[i-1] + 1
-                up[i] = up[i-1]
+            if A[i] < A[i - 1] and up != False:
+                length += 1
+                up = False
                 
-            else:
-                down[i] = down[i-1]
-                up[i] = up[i-1]
-            
-        return max(down[-1], up[-1])
-                
-                
-                
-                
-            
-        
-                
+        return length
