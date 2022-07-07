@@ -17,23 +17,18 @@ The score of this triangulation is dp[i][j], dp[i][k] + dp[k][j] + A[i] * A[j] *
 class Solution:
     def minScoreTriangulation(self, A: List[int]) -> int:
         
-        ## top down
-        @lru_cache(None)
-        def dp(i, j):
-            if j-i == 2:
-                return A[i] * A[i+1] *A[i+2]
-            
-            if j-i < 2 :
-                return 0
-            
-            res = float('inf')
-            
-            for k in range(i+1, j):
-                res = min(res, dp(i, k) + dp(k, j) + A[i] * A[k] * A[j])
-            
-            return res
+        ## bottom up 
+        n = len(A)
+        dp = [[0] *n for i in range(n)]
         
-        return dp(0, len(A)-1)
+        for i in range(2, n):
+            for l in range(0, n-i):
+                r = l+i
+                dp[l][r] = float('inf')
+                for k in range(l+1, r):
+                    dp[l][r] = min(dp[l][r], dp[l][k] + dp[k][r] + A[l]*A[r]*A[k])
+        
+        return dp[0][-1]
                 
                 
                 
