@@ -8,11 +8,13 @@ class Solution:
         for i in range(1, len(nums)):
             dp[i] = nums[i] + d[0][0]
             
-            while d and d[-1][0] < dp[i]:
+            # the queue is a mono queue, decreasing
+            while d and d[-1][0] < dp[i]: 
                 d.pop()
             d.append([dp[i], i])
             
-            if d[0][1] == i-k :
+            # expired step, we couldn't reach the next step from the idx d[0][1]
+            if d[0][1] == i-k : 
                 d.popleft()
                 
         return dp[-1]
