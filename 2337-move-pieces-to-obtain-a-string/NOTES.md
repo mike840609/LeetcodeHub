@@ -1,0 +1,1 @@
+https://leetcode.com/problems/move-pieces-to-obtain-a-string/discuss/2261392/JavaPython-3-O(n)-code%3A-compare-the-sequences-and-the-indices-of-'L'-and-'R'.
