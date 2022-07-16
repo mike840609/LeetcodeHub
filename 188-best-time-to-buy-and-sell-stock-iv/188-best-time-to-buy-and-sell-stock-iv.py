@@ -14,6 +14,6 @@ class Solution:
                     dp[i][0] = max(dp[i][0], dp[i-1][1] - p)                 
                     dp[i][1] = max(dp[i][1], dp[i][0] + p )
         # print(dp)
-        return max([x[1] for x in dp])
+        return dp[-1][1]
                 
         
