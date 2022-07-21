@@ -4,9 +4,9 @@ class Solution:
         
         d = defaultdict(int)
         res = 0 
-        for e in l:
-            res += d[e-k]
-            d[e] += 1
+        for accu in l:
+            res += d[accu-k]
+            d[accu] += 1
                 
         return res 
                 
