@@ -1,0 +1,1 @@
+https://leetcode.com/problems/binary-trees-with-factors/discuss/1107208/Python-Short-O(n2)-solution-explained
