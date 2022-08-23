@@ -20,24 +20,34 @@ Calculate digits with same prefix.
 Prefix cannot has duplicate digits.
 for case like 77xxx, we should stop the calculation.
 """
-
 class Solution:
     def numDupDigitsAtMostN(self, N: int) -> int:
-        L = list(map(int, str(N+1)))
-        n = len(L)
-        s = set()
+        def f(n):
+            if n == 0 or n == 1: return 1
+            return f(n-1) * n
         
-        # count number less than k digits
-        res = sum(9 * perm(9, i) for i in range(n-1))                
+        # pick m out of n, ordred matters
+        def P(m, n): return f(n) // f(n - m)
         
-        # count number has k digits
-        for i, x in enumerate(L):
-            for y in range(i==0, x):
-                if y not in s :
-                    res += perm(9 - i, n - i -1)
+        # N + 1 as padding.
+        nums = [int(d) for d in str(N + 1)]
+        K = len(nums) # N has K digits
+        cnt = 0 # number with no repeated val
+        
+        # count **postive number with digits less than K
+        for i in range(1, K): cnt += 9 * P(i-1, 9)
             
-            if x in s : break 
-            s.add(x)
-
-        return N-res
+        # count number with K digits
+        seen = set() # seen digit
+        for i in range(K): 
+            # prefix = nums[:i] + currentDigit
+            # currentDigit < nums[i]
+            for x in range(1 if i == 0 else 0, nums[i]):
+                if x in seen: continue # avoid duplication
+                cnt += P(K - (i + 1), 10 - (i + 1))
+            
+            # since next iteration, prefix has duplicate digits, break
+            if nums[i] in seen: break
+            seen.add(nums[i])
         
+        return N - cnt
