@@ -1,24 +1,26 @@
 class Solution:
-    def maximumRobots(self, chargeTimes: List[int], runningCosts: List[int], budget: int) -> int:
+    def maximumRobots(self, times: List[int], costs: List[int], budget: int) -> int:
+        cur = i = 0
+        n = len(times)
         
-        def remove_stale(pq, j):
-            while pq and pq[0][1] <= j :
-                heappop(pq)
-            return -pq[0][0] if pq else 0
-    
+        # mono increase deque
+        d = deque()
         
-        j, res, tmp, pq = -1, 0, 0, []
-
-        for i in range(len(chargeTimes)):
-            tmp += runningCosts[i]
-            heappush(pq, [-chargeTimes[i], i])
-
-            while remove_stale(pq, j) + (i- j) * tmp > budget:
-                j += 1
-                tmp -= runningCosts[j]
-
-            res = max(res, i-j)
+        for j in range(n):            
+            cur += costs[j]
+            
+            # max time
+            while d and times[d[-1]] <= times[j]:
+                d.pop()
+                 
+            d.append(j)
+            
+            # max(times) + k * sum(cost)
+            if times[d[0]] + (j - i + 1) * cur > budget:
+                if d[0] == i:
+                    d.popleft()
+                cur -= costs[i]
+                i += 1
+            
+        return n - i
         
-        return res
-
-                
