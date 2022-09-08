@@ -16,13 +16,11 @@ class Solution:
                 stk.append(node)
                 stk.append(node.left)                
                 node.left = None                
-                continue
-                
-            res.append(node.val)                
             
-            if node.right:
-                stk.append(node.right)
+            else:                
+                res.append(node.val)                
             
-            
+                if node.right:
+                    stk.append(node.right)
                 
         return res
