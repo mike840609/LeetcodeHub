@@ -1,0 +1,1 @@
+https://leetcode.com/problems/smallest-subarrays-with-maximum-bitwise-or/discuss/2588015/JavaC%2B%2BPython-Bit-Solution-with-Explanation
