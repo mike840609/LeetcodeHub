@@ -1,14 +1,22 @@
 class Solution:
     def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:        
-        i, j = 0, len(arr)-1
-                
-        while j-i >= k:
-            if abs(arr[i] - x) > abs(arr[j] - x):
-                i += 1
-            else:
-                j -= 1
+        idx = bisect.bisect_left(arr, x)
+        i, j = idx-1, idx
+        m = len(arr)
         
-        return arr[i:j+1]
-            
-            
-            
+        q = deque([])        
+        while len(q) < k:
+            if i < 0:
+                q.append(arr[j])
+                j += 1
+            elif j >= m:
+                q.appendleft(arr[i])
+                i-=1
+                
+            elif abs(x-arr[i]) <= abs(arr[j]-x):
+                q.appendleft(arr[i])
+                i-=1
+            else:
+                q.append(arr[j])
+                j+=1
+        return q
