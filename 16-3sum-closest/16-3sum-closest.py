@@ -8,22 +8,18 @@ class Solution:
         for i in range(len(nums)-2):
             j = i + 1
             k = len(nums) - 1
-            
-            t = target - nums[i]
+                        
             while j < k :
-                
-                if nums[j] + nums[k] < t:
-                    d = abs(nums[i]+nums[j] + nums[k] - target)
-                    if d < diff:
-                        res = nums[i]+nums[j] + nums[k]
-                        diff = d
-                    
+                d = ((nums[i]+nums[j] + nums[k]) - target)
+                if d < 0:
+                    if abs(d) < diff:
+                        res = d + target
+                        diff = abs(d)
                     j += 1
-                elif nums[j] + nums[k] > t:
-                    d = abs(nums[i]+nums[j] + nums[k] - target)
-                    if d < diff:
-                        res = nums[i]+nums[j] + nums[k]
-                        diff = d
+                elif d > 0:                    
+                    if abs(d) < diff:
+                        res = d + target
+                        diff = abs(d)
                     k -= 1
                 else:
                     return target
