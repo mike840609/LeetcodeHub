@@ -10,16 +10,17 @@ class Solution:
             k = len(nums) - 1
                         
             while j < k :
-                d = ((nums[i]+nums[j] + nums[k]) - target)
+                d = ((nums[i] + nums[j] + nums[k]) - target)
+                abs_d = abs(d)
                 if d < 0:
-                    if abs(d) < diff:
+                    if abs_d < diff:
                         res = d + target
-                        diff = abs(d)
+                        diff = abs_d
                     j += 1
                 elif d > 0:                    
-                    if abs(d) < diff:
+                    if abs_d < diff:
                         res = d + target
-                        diff = abs(d)
+                        diff = abs_d
                     k -= 1
                 else:
                     return target
