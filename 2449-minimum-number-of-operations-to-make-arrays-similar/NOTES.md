@@ -1,0 +1,1 @@
+https://leetcode.com/problems/minimum-number-of-operations-to-make-arrays-similar/discuss/2734189/C%2B%2BPython-Sort-odds-and-evens
