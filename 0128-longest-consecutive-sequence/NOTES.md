@@ -1,0 +1,1 @@
+https://leetcode.com/problems/longest-consecutive-sequence/discuss/41202/Python-O(n)-solution-using-sets/39339
