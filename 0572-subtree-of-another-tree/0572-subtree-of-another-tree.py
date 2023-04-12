@@ -1,18 +1,21 @@
-class Solution(object):
-    def isSame(self, s, t):
-        if not s and not t : return True         
-        if s and t:
-            return s.val == t.val and self.isSame(s.left, t.left) and self.isSame(s.right, t.right)
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSame(self, r1, r2):
+        if not r1 and not r2:
+            return True 
+        if r1 and r2:
+            return r1.val == r2.val and self.isSame(r1.left, r2.left) and self.isSame(r1.right, r2.right)            
         return False 
     
-    def isSubtree(self, s, t):        
-        if self.isSame(s,t): return True
-        if not s: return False 
-        return self.isSubtree(s.left, t) or self.isSubtree(s.right, t)
-        
-            
-        
-        
-                
-        
+    def isSubtree(self, r1: Optional[TreeNode], r2: Optional[TreeNode]) -> bool:
+        if self.isSame(r1,r2):
+            return True 
+        if not r1:
+            return False 
+        return self.isSubtree(r1.left, r2) or self.isSubtree(r1.right, r2)
         
