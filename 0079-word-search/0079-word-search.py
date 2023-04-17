@@ -1,33 +1,26 @@
 class Solution:
-    def exist(self, board: List[List[str]], word: str) -> bool:
-        m, n = len(board), len(board[0])
-        dp = [[0] * n for _ in range(m)]
-        self.res = False 
+    def exist(self, board, word):
+        if not board:
+            return False
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if self.dfs(board, i, j, word):
+                    return True
+        return False
+
+    
+    def dfs(self, board, i, j, word):
+        if len(word) == 0:
+            return True
+        if i<0 or i>=len(board) or j<0 or j>=len(board[0]) or word[0]!=board[i][j]: 
+            return False
         
-        def dfs(i, j, idx):
-            if idx == len(word)-1 and word[idx] == board[i][j]:
-                self.res = True 
-                return 
-            
-            if self.res == True:
-                return 
-            
-            if board[i][j] != word[idx]: 
-                return
-            
-            for x, y in [(i+1, j), (i, j+1), (i-1, j), (i, j-1)]:
-                if 0 <= x < m and 0 <= y < n and dp[x][y] == False:                    
-                    dp[x][y] = True 
-                    dfs(x, y, idx+1)
-                    dp[x][y] = False
-        
-        for i in range(m):
-            for j in range(n):
-                dp[i][j] = True 
-                dfs(i,j, 0)
-                dp[i][j] = False
-        
-        return self.res
+        tmp = board[i][j] 
+        board[i][j] = "#"        
+        res = self.dfs(board, i+1, j, word[1:]) or self.dfs(board, i-1, j, word[1:]) \
+        or self.dfs(board, i, j+1, word[1:]) or self.dfs(board, i, j-1, word[1:])
+        board[i][j] = tmp
+        return res
                     
             
         
