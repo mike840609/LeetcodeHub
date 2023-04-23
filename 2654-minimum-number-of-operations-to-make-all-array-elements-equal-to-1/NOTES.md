@@ -1,0 +1,1 @@
+https://leetcode.com/problems/minimum-number-of-operations-to-make-all-array-elements-equal-to-1/discuss/3445739/Simple-Observations-(an-age-old-Codeforces-problem)
