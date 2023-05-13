@@ -4,9 +4,8 @@ class Solution:
         dp[0] = 1
         
         for c in coins:
-            for i in range(1, amount+1):                                                        
-                if c <= i:                    
-                    dp[i] += dp[i-c]
+            for i in range(c, amount+1):
+                dp[i] += dp[i-c]
         
         return dp[-1]
                     
