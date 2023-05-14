@@ -1,12 +1,12 @@
 class Solution:
     def maximumOr(self, nums: List[int], k: int) -> int:
-        nums = sorted(nums)        
+
         if len(nums) == 1:
             return nums[0] << k
         
         dp1 = [0] * (len(nums) +1)
         dp2 = [0] * (len(nums) +1)
-        # print(nums)
+        
         for i in range(1, len(nums) +1):
             dp1[i] = dp1[i-1] | nums[i-1]
         for i in range(len(nums)-1, -1, -1):
