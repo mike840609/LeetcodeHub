@@ -1,42 +1,29 @@
 class Solution:
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
-        trie = {}
-        res = set()
-        m, n = len(board), len(board[0])
-        maxLen = max([len(w) for w in words]) 
+        
+        def dfs(i: int, j: int, node: dict, prefix: str):
+            letter = board[i][j]
+            node = node[letter]
+            
+            if '$' in node:
+                result.append(prefix + letter)
+                del node['$']
+                
+            board[i][j] = '#'
+            for r, c in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
+                if 0 <= r < m and 0 <= c < n and board[r][c] in node:
+                    dfs(r, c, node, prefix + letter)
+            board[i][j] = letter
+
+        m, n, result, trie = len(board), len(board[0]), [], {}
         
         for word in words:
-            p = trie 
-            for c in word:
-                p.setdefault(c,{})
-                p = p[c]
-            p['$'] = True
-        
-        
-        def dfs(i, j, p, tmp):
-            if '$' in p :
-                res.add(tmp)
+            node = trie
+            for letter in word:
+                node = node.setdefault(letter, {})
+            node['$'] = True
             
-            if len(tmp) > maxLen:
-                return 
-            
-            for x, y in [(i+1,j), (i,j+1), (i-1,j), (i,j-1)]:
-                if 0<= x < m and 0 <= y < n and board[x][y] in p:
-                    c = board[x][y]
-                    board[x][y] = '&'
-                    dfs(x, y, p[c], tmp + c)
-                    board[x][y] = c
-        
-        
-        
         for i in range(m):
             for j in range(n):
-                if board[i][j] in trie:
-                    c = board[i][j]
-                    board[i][j] = '&'
-                    dfs(i, j, trie[c], c)
-                    board[i][j] = c
-                    
-        return list(res)
-                    
-            
+                if board[i][j] in trie: dfs(i, j, trie, '')
+        return result
