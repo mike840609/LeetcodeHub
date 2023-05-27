@@ -1,9 +1,8 @@
 class Solution:
     def findMaxLength(self, nums: List[int]) -> int:
         cnt = 0
-        m = {}
-        res = 0
-        m[0] = -1
+        m = {0: -1}
+        res = 0        
         
         for idx, n in enumerate(nums):
             if n == 0:
