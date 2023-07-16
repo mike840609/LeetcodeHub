@@ -1,0 +1,1 @@
+https://leetcode.com/problems/length-of-the-longest-valid-substring/discuss/3771333/picture-short-and-concise-approach-easy-to-understand-in-depth-explanation/
