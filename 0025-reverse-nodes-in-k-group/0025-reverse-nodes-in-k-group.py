@@ -1,23 +1,24 @@
-class Solution(object):
+class Solution:    
     def reverseKGroup(self, head, k):
-        count, node = 0, head
         
-        while node and count < k:
-            node = node.next
-            count += 1
-            
-        if count < k: return head
-
-        new_head, prev = self.reverse(head, count)
-        head.next = self.reverseKGroup(new_head, k)
-        return prev
-    
-    def reverse(self, head, count):
-        prev, cur, nxt = None, head, head
-        while count > 0:
-            nxt = cur.next
-            cur.next = prev
-            prev = cur
-            cur = nxt
-            count -= 1
-        return (cur, prev)
+        # Dummy node initialization
+        dummy = jump = ListNode(-1)
+        dummy.next = l = r = head
+        
+        while True:
+            count = 0
+            while r and count < k:
+                count += 1
+                r = r.next
+            if count == k:
+                pre, cur = r, l
+                for _ in range(k):
+                    temp = cur.next
+                    cur.next = pre
+                    pre = cur
+                    cur = temp
+                jump.next = pre
+                jump = l
+                l = r
+            else:
+                return dummy.next
