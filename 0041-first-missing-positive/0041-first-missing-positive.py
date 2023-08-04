@@ -11,9 +11,12 @@ class Solution:
                 
             else:                
                 i += 1
+            
+            # print(nums)
                         
             
         for i, x in enumerate(nums, 1):
             if i != x:
                 return i
+            
         return len(nums)+1
