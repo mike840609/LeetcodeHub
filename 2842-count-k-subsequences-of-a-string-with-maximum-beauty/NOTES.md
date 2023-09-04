@@ -1,0 +1,1 @@
+https://leetcode.com/problems/count-k-subsequences-of-a-string-with-maximum-beauty/discuss/3993253/Pictures-Greedy-%2B-Math%3A-Easy-to-Understand-Guaranteed.
